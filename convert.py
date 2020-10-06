@@ -28,7 +28,7 @@ for index, input_filename in enumerate(filenames):
 		root.attrib["xmlns:inkscape"] = 'http://www.inkscape.org/namespaces/inkscape'
 		root.attrib["xmlns:sodipodi"] = 'http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd'
 		etree.register_namespace("", "http://www.w3.org/2000/svg")
-		layers = tree.find('//{http://www.w3.org/2000/svg}g[@id="Layers"]')
+		layers = tree.find('.//{http://www.w3.org/2000/svg}g[@id="Layers"]')
 		layers.attrib["inkscape:groupmode"] = "layer"
 		layers.attrib["inkscape:label"] = layers.attrib['id']
 		childs = layers[:]
