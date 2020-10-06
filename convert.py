@@ -2,16 +2,18 @@ import sys
 import os
 import xml.etree.ElementTree as etree
 
+
 filenames = sorted(sys.argv[1:])
 
 if len(filenames)==0:
 	print("Requires command line argument of at least one svg file!")
 	#os.system("pause")
 	exit()
-	
 output_directory = os.path.dirname(filenames[0])
 
 print("\r\n>> Executing")
+
+etree.register_namespace("", "http://www.w3.org/2000/svg")
 
 for index, input_filename in enumerate(filenames):
 	print(f">> Attempting to convert: {input_filename}")
@@ -27,11 +29,11 @@ for index, input_filename in enumerate(filenames):
 
 		root.attrib["xmlns:inkscape"] = 'http://www.inkscape.org/namespaces/inkscape'
 		root.attrib["xmlns:sodipodi"] = 'http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd'
-		etree.register_namespace("", "http://www.w3.org/2000/svg")
+
 		layers = tree.find('.//{http://www.w3.org/2000/svg}g[@id="Layers"]')
 		layers.attrib["inkscape:groupmode"] = "layer"
 		layers.attrib["inkscape:label"] = layers.attrib['id']
-		childs = layers[:]
+
 		root_groups = root.findall("./{http://www.w3.org/2000/svg}g")
 		layer_groups = layers.findall("./{http://www.w3.org/2000/svg}g")
 		for root_group in [*root_groups, *layer_groups]:
