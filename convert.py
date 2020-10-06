@@ -2,19 +2,16 @@ import sys
 import os
 import xml.etree.ElementTree as etree
 
-
-
-
 filenames = sorted(sys.argv[1:])
+
 if len(filenames)==0:
 	print("Requires command line argument of at least one svg file!")
-	os.system("pause")
+	#os.system("pause")
 	exit()
+	
 output_directory = os.path.dirname(filenames[0])
 
-
 print("\r\n>> Executing")
-
 
 def addns(tree, alias, uri):
 	root = tree.getroot()
@@ -43,10 +40,6 @@ for index, input_filename in enumerate(filenames):
 		layers.attrib["inkscape:groupmode"] = "layer"
 		layers.attrib["inkscape:label"] = layers.attrib['id']
 		childs = layers[:]
-		# for child in childs:
-		# 	layers.remove(child)
-		# 	root.append(child)
-		# root.remove(layers)
 		root_groups = root.findall("./{http://www.w3.org/2000/svg}g")
 		layer_groups = layers.findall("./{http://www.w3.org/2000/svg}g")
 		for root_group in [*root_groups, *layer_groups]:
@@ -58,5 +51,5 @@ for index, input_filename in enumerate(filenames):
 			tree.write(output_filename)
 
 
-print("success")
+print("Success!")
 #os.system("pause")
