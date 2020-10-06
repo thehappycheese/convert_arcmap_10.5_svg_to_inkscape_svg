@@ -13,14 +13,6 @@ output_directory = os.path.dirname(filenames[0])
 
 print("\r\n>> Executing")
 
-def addns(tree, alias, uri):
-	root = tree.getroot()
-	nsmap = root.nsmap
-	nsmap[alias] = uri
-	new_root = etree.Element(root.tag, attrib=root.attrib, nsmap=nsmap)
-	new_root[:] = root[:]
-	return new_root.getroottree()
-
 for index, input_filename in enumerate(filenames):
 	print(f">> Attempting to convert: {input_filename}")
 	(output_filename, output_extention) = os.path.splitext(input_filename)
